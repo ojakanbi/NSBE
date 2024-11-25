@@ -3,9 +3,7 @@ from bs4 import BeautifulSoup # for scrapping the info off of websites via their
 import gspread # for google sheets
 from google.oauth2.service_account import Credentials # for google cloud authentication
 from datetime import datetime
-
 import re # for regex for dates, as of rn only for JVL
-#test
 
 class NSBEScholarshipsJVL:
     def __init__(self, urls):
