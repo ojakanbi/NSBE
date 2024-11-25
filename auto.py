@@ -7,7 +7,6 @@ from selenium.webdriver.support.ui import Select
 import time
 from datetime import datetime
 
-# test
 
 dates = ['09/09/2024', '09/16/2024', '09/23/2024', '09/30/2024', '10/07/2024', 
          '10/14/2024', '10/21/2024', '10/28/2024', '11/04/2024', '11/11/2024', '11/18/2024',
