@@ -5,6 +5,7 @@ from google.oauth2.service_account import Credentials # for google cloud authent
 from datetime import datetime
 
 import re # for regex for dates, as of rn only for JVL
+#test
 
 class NSBEScholarshipsJVL:
     def __init__(self, urls):
