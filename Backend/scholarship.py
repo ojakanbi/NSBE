@@ -139,31 +139,31 @@ class NSBEScholarshipsJVL:
         return self.scholarships
 
 
-if __name__ == "__main__":
-    urls = [
-        "https://jlvcollegecounseling.com/scholarships/january-scholarships/",
-        "https://jlvcollegecounseling.com/scholarships/february-scholarships/",
-        "https://jlvcollegecounseling.com/scholarships/march-scholarships/",
-        "https://jlvcollegecounseling.com/scholarships/april-scholarships/",
-        "https://jlvcollegecounseling.com/scholarships/may-scholarships/",
-        "https://jlvcollegecounseling.com/scholarships/june-scholarships/",
-        "https://jlvcollegecounseling.com/scholarships/july-scholarships/",
-        "https://jlvcollegecounseling.com/scholarships/august-scholarships/",
-        "https://jlvcollegecounseling.com/scholarships/september-scholarships/",
-        "https://jlvcollegecounseling.com/scholarships/october-scholarships/",
-        "https://jlvcollegecounseling.com/scholarships/november-scholarships/",
-        "https://jlvcollegecounseling.com/scholarships/december-scholarships/"
+# if __name__ == "__main__":
+#     urls = [
+#         "https://jlvcollegecounseling.com/scholarships/january-scholarships/",
+#         "https://jlvcollegecounseling.com/scholarships/february-scholarships/",
+#         "https://jlvcollegecounseling.com/scholarships/march-scholarships/",
+#         "https://jlvcollegecounseling.com/scholarships/april-scholarships/",
+#         "https://jlvcollegecounseling.com/scholarships/may-scholarships/",
+#         "https://jlvcollegecounseling.com/scholarships/june-scholarships/",
+#         "https://jlvcollegecounseling.com/scholarships/july-scholarships/",
+#         "https://jlvcollegecounseling.com/scholarships/august-scholarships/",
+#         "https://jlvcollegecounseling.com/scholarships/september-scholarships/",
+#         "https://jlvcollegecounseling.com/scholarships/october-scholarships/",
+#         "https://jlvcollegecounseling.com/scholarships/november-scholarships/",
+#         "https://jlvcollegecounseling.com/scholarships/december-scholarships/"
 
-    ]
+#     ]
 
-    scraper = NSBEScholarshipsJVL(urls)
-    all_scholarships = scraper.run()
+#     scraper = NSBEScholarshipsJVL(urls)
+#     all_scholarships = scraper.run()
 
-    print("Scholarships:")
-    if len(all_scholarships) > 0:
-        for val, name in enumerate(all_scholarships.keys()):
-            print(f"Name: {name}, Due Date: {scraper.scholarships[name][2]}, Number: {val+1}\n")
-    else:
-        print("nada")
-    # for name, details in all_scholarships.items():
-    #     print(f"Name: {name}, Details: {details}")
+#     print("Scholarships:")
+#     if len(all_scholarships) > 0:
+#         for val, name in enumerate(all_scholarships.keys()):
+#             print(f"Name: {name}, Due Date: {scraper.scholarships[name][2]}, Number: {val+1}\n")
+#     else:
+#         print("nada")
+#     # for name, details in all_scholarships.items():
+#     #     print(f"Name: {name}, Details: {details}")
