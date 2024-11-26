@@ -1,7 +1,9 @@
 // src/app/page.js
 export default async function Home() {
   // Fetch data from the Next.js API route
-  const res = await fetch('http://localhost:3000/api/scholarships', {
+  const baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:300' : process.env.NEXT_PUBLIC_FRONTEND_URL;
+
+  const res = await fetch(`${baseURL}/api/scholarships`, {
     cache: 'no-store', // Avoid caching for fresh data on every request
   });
 
