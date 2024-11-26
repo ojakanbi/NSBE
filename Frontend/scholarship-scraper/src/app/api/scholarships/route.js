@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : 'https://dev.example.com';
+const baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : process.env.NEXT_PUBLIC_BACKEND_URL;;
 
 export async function GET(req) {
     try {
