@@ -1,6 +1,9 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from scholarship import NSBEScholarshipsJVL  # Import the scraper class
+try:
+    from scholarship import NSBEScholarshipsJVL  # Absolute import for local testing
+except ImportError:
+    from .scholarship import NSBEScholarshipsJVL  # Relative import for deployment
 from dotenv import load_dotenv
 import os
 import logging
