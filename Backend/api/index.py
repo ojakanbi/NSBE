@@ -3,6 +3,7 @@ from flask_cors import CORS
 from scholarship import NSBEScholarshipsJVL  # Import the scraper class
 from dotenv import load_dotenv
 import os
+import logging
 
 load_dotenv()
 
@@ -25,8 +26,12 @@ urls = [
     "https://jlvcollegecounseling.com/scholarships/december-scholarships/"
 ]
 
-import logging
+
 logging.basicConfig(level=logging.DEBUG)
+
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({"message": "Welcome to the backend!"}), 200
 
 @app.route('/api/scholarships', methods=['GET'])
 def get_scholarships():
