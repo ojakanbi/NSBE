@@ -25,13 +25,19 @@ urls = [
     "https://jlvcollegecounseling.com/scholarships/december-scholarships/"
 ]
 
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
 @app.route('/api/scholarships', methods=['GET'])
 def get_scholarships():
     try:
+        logging.info("Starting the scraper...")
         scraper = NSBEScholarshipsJVL(urls)
         all_scholarships = scraper.run()
+        logging.info("Scraper completed successfully.")
         return jsonify(all_scholarships)
     except Exception as e:
+        logging.error(f"Error in scraper: {e}")
         return jsonify({"error": str(e)}), 500
 
 
