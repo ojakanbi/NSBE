@@ -18,6 +18,8 @@ export default function Home() {
     setError(null);
     try {
       const response = await fetch(`${baseURL}/api/scholarships`);
+      console.log("PAGE JS: ", baseURL)
+      console.log("RESPONSE: ", response)
       if (!response.ok) {
         throw new Error('Failed to fetch scholarships');
       }

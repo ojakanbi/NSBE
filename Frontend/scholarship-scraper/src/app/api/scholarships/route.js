@@ -1,5 +1,6 @@
 import axios from 'axios';
-const baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : process.env.NEXT_PUBLIC_BACKEND_URL;;
+const baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : process.env.NEXT_PUBLIC_BACKEND_URL
+console.log("ROUTE JS: ", baseURL)
 
 export async function GET(req) {
     try {
