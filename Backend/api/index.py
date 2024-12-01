@@ -15,14 +15,6 @@ CORS(app, origins=["https://frontend-nsbe-1.vercel.app"])
 
 
 urls = [
-    "https://jlvcollegecounseling.com/scholarships/january-scholarships/",
-    "https://jlvcollegecounseling.com/scholarships/february-scholarships/",
-    "https://jlvcollegecounseling.com/scholarships/march-scholarships/",
-    "https://jlvcollegecounseling.com/scholarships/april-scholarships/",
-    "https://jlvcollegecounseling.com/scholarships/may-scholarships/",
-    "https://jlvcollegecounseling.com/scholarships/june-scholarships/",
-    "https://jlvcollegecounseling.com/scholarships/july-scholarships/",
-    "https://jlvcollegecounseling.com/scholarships/august-scholarships/",
     "https://jlvcollegecounseling.com/scholarships/september-scholarships/",
     "https://jlvcollegecounseling.com/scholarships/october-scholarships/",
     "https://jlvcollegecounseling.com/scholarships/november-scholarships/",
