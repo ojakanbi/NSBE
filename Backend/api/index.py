@@ -11,7 +11,7 @@ import logging
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, origins=["https://frontend-nsbe-1.vercel.app"])
+CORS(app, origins=["https://nsbe-frontend-1.vercel.app"])
 
 
 urls = [
