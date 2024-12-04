@@ -1,46 +1,35 @@
-from flask import Flask, jsonify, request
+from api.db import app  # Import the app initialized in `db.py`
 from flask_cors import CORS
-try:
-    from scholarship import NSBEScholarshipsJVL  # Absolute import for local testing
-except ImportError:
-    from .scholarship import NSBEScholarshipsJVL  # Relative import for deployment
-from dotenv import load_dotenv
-import os
+from api.members import members_bp
+from api.points import points_bp
+from api.scholarships import scholarships_bp
 import logging
+import os
 
-load_dotenv()
-
-app = Flask(__name__)
-CORS(app, origins=["https://nsbe-frontend-1.vercel.app"])
-
-
-urls = [
-    "https://jlvcollegecounseling.com/scholarships/september-scholarships/",
-    "https://jlvcollegecounseling.com/scholarships/october-scholarships/",
-    "https://jlvcollegecounseling.com/scholarships/november-scholarships/",
-    "https://jlvcollegecounseling.com/scholarships/december-scholarships/"
+# CORS Configuration
+allowed_origins = [
+    "https://nsbe-frontend-1.vercel.app",
+    "http://localhost:3000"
 ]
+CORS(app, resources={r"/*": {"origins": allowed_origins}})
 
+# Logging Setup
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
-logging.basicConfig(level=logging.DEBUG)
+# Register Blueprints
+app.register_blueprint(members_bp, url_prefix="/api/members")
+app.register_blueprint(points_bp, url_prefix="/api/points")
+app.register_blueprint(scholarships_bp, url_prefix="/api/scholarships")
 
+# Root Route
 @app.route('/', methods=['GET'])
 def home():
-    return jsonify({"message": "Welcome to the backend!"}), 200
+    return {"message": "Welcome to the NSBE Backend!"}, 200
 
-@app.route('/api/scholarships', methods=['GET'])
-def get_scholarships():
-    try:
-        logging.info("Starting the scraper...")
-        scraper = NSBEScholarshipsJVL(urls)
-        all_scholarships = scraper.run()
-        logging.info("Scraper completed successfully.")
-        return jsonify(all_scholarships)
-    except Exception as e:
-        logging.error(f"Error in scraper: {e}")
-        return jsonify({"error": str(e)}), 500
-
-
+# Run the app
 if __name__ == '__main__':
     is_debug = os.getenv("FLASK_ENV") == "development"
     app.run(debug=is_debug, port=8000)
