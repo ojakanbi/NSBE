@@ -18,6 +18,7 @@ def get_scholarships():
         scraper = NSBEScholarshipsJVL(urls)
         all_scholarships = scraper.run()
         logging.info("Scraper completed successfully.")
+        print("Print: ", all_scholarships)
         return jsonify(all_scholarships)
     except Exception as e:
         logging.error(f"Error in scraper: {e}")

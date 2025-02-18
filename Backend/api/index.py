@@ -1,4 +1,4 @@
-from api.db import app  # Import the app initialized in `db.py`
+from .db import app  # Use relative imports  # Import the app initialized in `db.py`
 from flask_cors import CORS
 from api.members import members_bp
 from api.points import points_bp

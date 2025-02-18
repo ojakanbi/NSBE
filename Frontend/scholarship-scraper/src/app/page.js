@@ -13,6 +13,12 @@ export default function Home() {
         {/* Main Content */}
         <main className="flex flex-col flex-grow items-center justify-center px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full">
+          <Link href="/national-login">
+              <div className="bg-white shadow-md rounded-lg p-6 hover:shadow-lg cursor-pointer text-center">
+                <h2 className="text-2xl font-semibold text-gray-800">National login</h2>
+                <p className="text-gray-600 mt-2">Your Nationals guide</p>
+              </div>
+            </Link>
             {/* Link to Scholarships */}
             <Link href="/scholarships">
               <div className="bg-white shadow-md rounded-lg p-6 hover:shadow-lg cursor-pointer text-center">

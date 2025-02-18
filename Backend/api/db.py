@@ -8,6 +8,8 @@ load_dotenv()
 app = Flask(__name__)
 app.config["MONGO_URI"] = os.getenv("MONGO_URI")
 mongo = PyMongo(app)
+print(f"MONGO_URI: {os.getenv('MONGO_URI')}")
+
 
 # Check MongoDB connection
 try:

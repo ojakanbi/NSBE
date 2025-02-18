@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "firstname": "OJ",
+    "lastname": "Akabi",
+    "email": "oja5195",
+    "roomID": 1
+  },
+  {
+    "id": 2,
+    "firstname": "Dul",
+    "lastname": "Dul",
+    "email": "Dul5195",
+    "roomID": 2
+  },
+  {
+    "id": 3,
+    "firstname": "Goody",
+    "lastname": "Dul",
+    "email": "goody5195",
+    "roomID": 1
+  },
+  {
+    "id": 4,
+    "firstname": "Test",
+    "lastname": "Dul",
+    "email": "goody5195",
+    "roomID": 1
+  }
+]
