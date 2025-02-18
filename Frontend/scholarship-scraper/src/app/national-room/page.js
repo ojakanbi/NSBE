@@ -1,6 +1,6 @@
 'use client';
 
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import BackToNational from '../components/BackToNational';
 
@@ -9,18 +9,19 @@ export default function NationalRoom() {
     const [user, setUser] = useState(null);
     const [allUserData, setAllUserData] = useState([]);
     const [viewRoommates, setViewRoommates] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    // Check for stored user on page load
+    // ✅ Check for stored user on page load
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem('user'));
         if (!storedUser || !storedUser.firstname) {
-            router.push('/national-login'); // Redirect to login if no user found
+            router.push('/national-login'); // Redirect if no user is found
         } else {
             setUser(storedUser);
         }
-    }, [user, router]); // Runs when user updates
+    }, [router]); // ✅ Removed `user` to prevent infinite re-renders
 
-    //  Fetch all user data
+    // ✅ Fetch all user data
     useEffect(() => {
         async function fetchAllUserData() {
             try {
@@ -36,6 +37,8 @@ export default function NationalRoom() {
                 }
             } catch (error) {
                 console.error("Fetch Error:", error.message);
+            } finally {
+                setLoading(false);
             }
         }
         fetchAllUserData();
@@ -49,7 +52,15 @@ export default function NationalRoom() {
             );
             setViewRoommates(filteredRoommates);
         }
-    }, [allUserData, user]); // Runs when user or allUserData updates
+    }, [user, allUserData]); // ✅ Ensures it only runs when user & allUserData are available
+
+    if (loading) {
+        return (
+            <div className="min-h-screen flex flex-col items-center justify-center">
+                <p className="text-gray-600 text-lg font-medium">Loading...</p>
+            </div>
+        );
+    }
 
     if (!user) return null; // Prevent rendering if user data is not loaded
 
@@ -58,12 +69,12 @@ export default function NationalRoom() {
             <BackToNational />
             <h2 className="text-2xl font-bold text-center mb-4 text-gray-800">🏨 Roommates</h2>
 
-            <ul className="space-y-3">
+            <ul className="space-y-3 w-full max-w-md">
                 {viewRoommates.length > 0 ? (
                     viewRoommates.map((roommate, index) => (
                         <li 
                             key={index} 
-                            className="bg-gray-200 p-3 rounded-lg flex items-center gap-3 shadow-sm hover:bg-gray-200 transition duration-300"
+                            className="bg-gray-200 p-3 rounded-lg flex items-center gap-3 shadow-sm hover:bg-gray-300 transition duration-300"
                         >
                             <div className="w-10 h-10 bg-blue-500 text-white flex items-center justify-center rounded-full font-semibold">
                                 {roommate.firstname.charAt(0)}{roommate.lastname.charAt(0)}

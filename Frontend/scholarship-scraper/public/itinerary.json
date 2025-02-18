@@ -5,7 +5,7 @@
       "end": "March 9, 2025"
     },
     "schedule": {
-      "March 5": {
+      "February 17": {
         "summary": [
           "Leaving Penn State for Chicago",
           "Checking in to the Hotel",
@@ -89,22 +89,22 @@
           },
           {
             "type": "event",
-            "time": "6:00 PM",
+            "time": "11:25 PM",
             "name": "Opening Ceremony",
             "end_time": "9:00 PM",
             "required": true
           },
           {
             "type": "event",
-            "time": "9:00 PM",
+            "time": "11:31 PM",
             "name": "Hospitality Suites/Interviews",
-            "end_time": "11:00 PM",
+            "end_time": "11:59 PM",
             "required": false
           }
         ]
       },
 
-      "March 6": {
+      "February 18": {
         "summary": [
           "Leaving Penn State for Chicago",
           "Checking in to the Hotel",

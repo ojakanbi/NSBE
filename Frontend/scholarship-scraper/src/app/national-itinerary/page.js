@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import ItineraryList from './ItineraryList';
 import FullItinerary from './FullItinerary';
+import CurrentEvent from './CurrentEvent';
 import BackToNational from '../components/BackToNational';
 
 export default function Itinerary() {
@@ -14,12 +15,7 @@ export default function Itinerary() {
     const [nextEvent, setNextEvent] = useState(null);
     const [countdown, setCountdown] = useState("");
 
-    // 🔧 Debug Mode State
-    const [debugMode, setDebugMode] = useState(false);
-    const [debugDate, setDebugDate] = useState("2025-03-05");
-    const [debugTime, setDebugTime] = useState("00:00");
-    const [mockTime, setMockTime] = useState(new Date(`${debugDate}T${debugTime}:00`));
-
+    // ✅ Fetch itinerary data
     useEffect(() => {
         async function fetchData() {
             try {
@@ -35,38 +31,25 @@ export default function Itinerary() {
         fetchData();
     }, []);
 
+    // ✅ Sync real-time clock
     useEffect(() => {
-        if (debugMode) {
-            if (!mockTime || isNaN(mockTime.getTime())) {
-                setMockTime(new Date(`${debugDate}T${debugTime}:00`));
-            }
+        setCurrentDate(new Date().toLocaleString("en-US", { month: "long", day: "numeric" }));
 
-            const interval = setInterval(() => {
-                setMockTime((prevTime) => prevTime ? new Date(prevTime.getTime() + 60000) : new Date(`${debugDate}T${debugTime}:00`));
-            }, 1000);
+        const interval = setInterval(() => {
+            setCurrentTime(new Date());
+        }, 1000);
 
-            return () => clearInterval(interval);
-        } else {
-            setCurrentDate(new Date().toLocaleString("en-US", { month: "long", day: "numeric" }));
+        return () => clearInterval(interval);
+    }, []);
 
-            const interval = setInterval(() => {
-                setCurrentTime(new Date());
-            }, 1000);
-
-            return () => clearInterval(interval);
-        }
-    }, [debugMode, debugDate, debugTime, mockTime]);  // ✅ Fix: Added `debugMode` to the dependency array
-
+    // ✅ Determine current & next event
     useEffect(() => {
         if (!itinerary) return;
 
-        const nowTime = debugMode ? mockTime : currentTime;
-        if (!nowTime || isNaN(nowTime.getTime())) return;
-
-        const today = nowTime.toLocaleString("en-US", { month: "long", day: "numeric" });
+        const today = currentTime.toLocaleString("en-US", { month: "long", day: "numeric" });
 
         const eventsToday = itinerary.schedule[today]?.timeline || [];
-        let now = nowTime.getHours() * 60 + nowTime.getMinutes();
+        let now = currentTime.getHours() * 60 + currentTime.getMinutes();
 
         let current = null;
         let next = null;
@@ -91,7 +74,7 @@ export default function Itinerary() {
         } else {
             setCountdown("No more events today");
         }
-    }, [currentTime, mockTime, itinerary]);  
+    }, [currentTime, itinerary]);  
 
     function parseTime(timeStr) {
         if (!timeStr) return 0;
@@ -109,25 +92,46 @@ export default function Itinerary() {
         <div className="min-h-screen bg-gray-100 flex flex-col items-center p-6">
             <BackToNational />
 
-            {/* Debug Mode Toggle */}
-            <button
-                onClick={() => setDebugMode(!debugMode)}
-                className={`mb-4 px-4 py-2 font-semibold rounded-lg shadow-md ${
-                    debugMode ? "bg-red-500 text-white" : "bg-blue-500 text-white"
-                }`}
-            >
-                {debugMode ? "🔴 Disable Debug Mode" : "🛠 Enable Debug Mode"}
-            </button>
+            {/* Display Current Event */}
+            <CurrentEvent 
+                currentEvent={currentEvent} 
+                nextEvent={nextEvent} 
+                countdown={countdown} 
+                currentTime={currentTime} 
+            />
 
-            {/* Debug Mode UI */}
-            {debugMode && (
-                <div className="w-full max-w-md bg-white p-4 rounded-lg shadow-md mb-6">
-                    <h3 className="text-lg font-semibold text-gray-800">🛠 Debug Settings</h3>
-                    <label className="text-sm text-gray-600">📅 Date:</label>
-                    <input type="date" value={debugDate} onChange={(e) => setDebugDate(e.target.value)} className="border rounded p-2" />
-                    <label className="text-sm text-gray-600">⏰ Time:</label>
-                    <input type="time" value={debugTime} onChange={(e) => setDebugTime(e.target.value)} className="border rounded p-2" />
-                </div>
+            {/* View Toggle Buttons */}
+            <div className="flex space-x-4 mb-6 mt-4">
+                <button
+                    onClick={() => setSelectedView("live")}
+                    className={`w-1/2 px-4 py-2 rounded-lg font-medium transition ${
+                        selectedView === "live" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-800"
+                    }`}
+                >
+                    🔴 Live Schedule
+                </button>
+                <button
+                    onClick={() => setSelectedView("full")}
+                    className={`w-1/2 px-4 py-2 rounded-lg font-medium transition ${
+                        selectedView === "full" ? "bg-green-600 text-white" : "bg-gray-200 text-gray-800"
+                    }`}
+                >
+                    📖 Full Itinerary
+                </button>
+            </div>
+
+            {/* Conditionally Render Views */}
+            {selectedView === "live" ? (
+                <ItineraryList 
+                    itinerary={itinerary} 
+                    currentDate={currentDate} 
+                    currentEvent={currentEvent} 
+                    nextEvent={nextEvent} 
+                    countdown={countdown} 
+                    currentTime={currentTime} 
+                />
+            ) : (
+                <FullItinerary itinerary={itinerary} currentDate={currentDate} />
             )}
         </div>
     );
