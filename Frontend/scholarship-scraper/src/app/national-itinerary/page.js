@@ -55,7 +55,7 @@ export default function Itinerary() {
 
             return () => clearInterval(interval);
         }
-    }, [debugMode, debugDate, debugTime, mockTime]);  // ✅ Fix: Added `mockTime` and `debugMode` dependencies
+    }, [debugMode, debugDate, debugTime, mockTime]);  // ✅ Fix: Added `debugMode` to the dependency array
 
     useEffect(() => {
         if (!itinerary) return;
@@ -91,7 +91,7 @@ export default function Itinerary() {
         } else {
             setCountdown("No more events today");
         }
-    }, [currentTime, mockTime, itinerary]);  // ✅ Fix: Added missing dependencies
+    }, [currentTime, mockTime, itinerary]);  
 
     function parseTime(timeStr) {
         if (!timeStr) return 0;

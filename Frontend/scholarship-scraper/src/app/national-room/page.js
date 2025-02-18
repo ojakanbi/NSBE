@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import BackToNational from '../components/BackToNational';
 
@@ -18,7 +18,7 @@ export default function NationalRoom() {
         } else {
             setUser(storedUser);
         }
-    }, []);
+    }, [user, router]); // Runs when user updates
 
     //  Fetch all user data
     useEffect(() => {

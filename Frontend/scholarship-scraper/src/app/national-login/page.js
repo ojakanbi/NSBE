@@ -67,7 +67,7 @@ export default function National() {
             <BackToHome />
             {isLoggedIn ? (
                 <div className="max-w-lg mx-auto bg-white p-8 rounded-2xl shadow-lg text-center">
-                    <h1 className="text-4xl font-extrabold mb-4 text-blue-700">🎉 You're Headed To Nationals!</h1>
+                    <h1 className="text-4xl font-extrabold mb-4 text-blue-700">🎉 Headed To Nationals!</h1>
                     <p className="text-gray-600 text-lg mb-6">
                         Hello, <span className="font-semibold text-gray-800">{userData?.firstname || 'User'}</span>!
                         Get ready for an amazing experience.
