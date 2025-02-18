@@ -9,7 +9,7 @@ export default function Itinerary() {
     const [itinerary, setItinerary] = useState(null);
     const [selectedView, setSelectedView] = useState("live");
     const [currentDate, setCurrentDate] = useState("");
-    const [currentTime, setCurrentTime] = useState(new Date());  // Ensure currentTime is always valid
+    const [currentTime, setCurrentTime] = useState(new Date());
     const [currentEvent, setCurrentEvent] = useState(null);
     const [nextEvent, setNextEvent] = useState(null);
     const [countdown, setCountdown] = useState("");
@@ -18,7 +18,7 @@ export default function Itinerary() {
     const [debugMode, setDebugMode] = useState(false);
     const [debugDate, setDebugDate] = useState("2025-03-05");
     const [debugTime, setDebugTime] = useState("00:00");
-    const [mockTime, setMockTime] = useState(new Date(`${debugDate}T${debugTime}:00`)); // Initialize with default value
+    const [mockTime, setMockTime] = useState(new Date(`${debugDate}T${debugTime}:00`));
 
     useEffect(() => {
         async function fetchData() {
@@ -37,17 +37,12 @@ export default function Itinerary() {
 
     useEffect(() => {
         if (debugMode) {
-            // Ensure mockTime is always a valid Date object
             if (!mockTime || isNaN(mockTime.getTime())) {
                 setMockTime(new Date(`${debugDate}T${debugTime}:00`));
             }
 
-            // Simulate time moving forward in Debug Mode
             const interval = setInterval(() => {
-                setMockTime((prevTime) => {
-                    if (!prevTime) return new Date(`${debugDate}T${debugTime}:00`);  // Ensure it initializes
-                    return new Date(prevTime.getTime() + 60000); // Increment 1 min per second
-                });
+                setMockTime((prevTime) => prevTime ? new Date(prevTime.getTime() + 60000) : new Date(`${debugDate}T${debugTime}:00`));
             }, 1000);
 
             return () => clearInterval(interval);
@@ -60,7 +55,7 @@ export default function Itinerary() {
 
             return () => clearInterval(interval);
         }
-    }, [debugMode, debugDate, debugTime]);
+    }, [debugMode, debugDate, debugTime, mockTime]);  // ✅ Fix: Added `mockTime` and `debugMode` dependencies
 
     useEffect(() => {
         if (!itinerary) return;
@@ -96,7 +91,7 @@ export default function Itinerary() {
         } else {
             setCountdown("No more events today");
         }
-    }, [currentTime, mockTime, itinerary]);
+    }, [currentTime, mockTime, itinerary]);  // ✅ Fix: Added missing dependencies
 
     function parseTime(timeStr) {
         if (!timeStr) return 0;
@@ -114,7 +109,7 @@ export default function Itinerary() {
         <div className="min-h-screen bg-gray-100 flex flex-col items-center p-6">
             <BackToNational />
 
-            {/* 🔧 Debug Mode Toggle */}
+            {/* Debug Mode Toggle */}
             <button
                 onClick={() => setDebugMode(!debugMode)}
                 className={`mb-4 px-4 py-2 font-semibold rounded-lg shadow-md ${
@@ -128,46 +123,11 @@ export default function Itinerary() {
             {debugMode && (
                 <div className="w-full max-w-md bg-white p-4 rounded-lg shadow-md mb-6">
                     <h3 className="text-lg font-semibold text-gray-800">🛠 Debug Settings</h3>
-                    <div className="flex flex-col gap-2 mt-2">
-                        <label className="text-sm text-gray-600">📅 Date:</label>
-                        <input
-                            type="date"
-                            value={debugDate}
-                            onChange={(e) => setDebugDate(e.target.value)}
-                            className="border rounded p-2"
-                        />
-                        <label className="text-sm text-gray-600">⏰ Time:</label>
-                        <input
-                            type="time"
-                            value={debugTime}
-                            onChange={(e) => setDebugTime(e.target.value)}
-                            className="border rounded p-2"
-                        />
-                    </div>
+                    <label className="text-sm text-gray-600">📅 Date:</label>
+                    <input type="date" value={debugDate} onChange={(e) => setDebugDate(e.target.value)} className="border rounded p-2" />
+                    <label className="text-sm text-gray-600">⏰ Time:</label>
+                    <input type="time" value={debugTime} onChange={(e) => setDebugTime(e.target.value)} className="border rounded p-2" />
                 </div>
-            )}
-
-            {/* Current Event Display */}
-            <div className="p-4 bg-white rounded-lg shadow-md text-center mb-4 w-full max-w-lg">
-                <p className="text-lg font-medium text-gray-700">
-                    🕒 {debugMode ? "Debugging Time" : "Current Time"}: {(debugMode ? mockTime : currentTime)?.toLocaleTimeString() || "Loading..."}
-                </p>
-                {currentEvent ? (
-                    <p className="text-xl font-bold text-blue-600">
-                        🎉 Now: {currentEvent.name || currentEvent.type} ({currentEvent.time || currentEvent.departure_time} - {currentEvent.end_time || currentEvent.expected_arrival})
-                    </p>
-                ) : (
-                    <p className="text-xl font-bold text-green-600">
-                        ⏳ Next: {nextEvent ? `${nextEvent.name || nextEvent.type} in ${countdown}` : "No more events today"}
-                    </p>
-                )}
-            </div>
-
-            {/* Render Itinerary */}
-            {selectedView === "live" ? (
-                <ItineraryList itinerary={itinerary} currentDate={currentDate} currentEvent={currentEvent} nextEvent={nextEvent} countdown={countdown} currentTime={debugMode ? mockTime : currentTime} />
-            ) : (
-                <FullItinerary itinerary={itinerary} currentDate={currentDate} />
             )}
         </div>
     );

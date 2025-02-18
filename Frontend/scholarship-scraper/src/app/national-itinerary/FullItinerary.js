@@ -1,13 +1,13 @@
 'use client';
-
 import { useState } from 'react';
 
 export default function FullItinerary({ itinerary, currentDate }) {
+    const itineraryDays = Object.keys(itinerary.schedule);
+    const [selectedDayIndex, setSelectedDayIndex] = useState(itineraryDays.indexOf(currentDate) || 0);
     if (!itinerary) return <p className="text-center text-gray-600">Loading itinerary...</p>;
     
 
-    const itineraryDays = Object.keys(itinerary.schedule);
-    const [selectedDayIndex, setSelectedDayIndex] = useState(itineraryDays.indexOf(currentDate) || 0);
+  
 
     const handleNextDay = () => {
         if (selectedDayIndex < itineraryDays.length - 1) {
