@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 export default function ItineraryList({ itinerary, currentDate, currentEvent, nextEvent, countdown, currentTime }) {
     const [progress, setProgress] = useState(0);
-    const eventsToday = itinerary.schedule[currentDate]?.timeline || [];
+    const eventsToday = itinerary.schedule && itinerary.schedule[currentDate] ? itinerary.schedule[currentDate].timeline : [];
 
     // 🔄 Update progress bar for next event countdown
     useEffect(() => {

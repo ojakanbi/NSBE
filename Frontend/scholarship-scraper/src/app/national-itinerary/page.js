@@ -15,17 +15,21 @@ export default function Itinerary() {
     const [nextEvent, setNextEvent] = useState(null);
     const [countdown, setCountdown] = useState("");
 
-    // ✅ Fetch itinerary data
+    // ✅ Fetch itinerary data only when the component mounts
     useEffect(() => {
         async function fetchData() {
             try {
                 const response = await fetch('/api/itinerary');
                 const data = await response.json();
-                if (data.success) {
+                if (data.success && data.data) {
                     setItinerary(data.data);
+                } else {
+                    console.error("No itinerary data available.");
+                    setItinerary({ schedule: {} }); // Prevent crashes
                 }
             } catch (error) {
                 console.error("Error fetching itinerary:", error);
+                setItinerary({ schedule: {} });
             }
         }
         fetchData();
@@ -44,13 +48,17 @@ export default function Itinerary() {
 
     // ✅ Determine current & next event
     useEffect(() => {
-        if (!itinerary) return;
+        if (!itinerary || !currentDate || !itinerary.schedule[currentDate]) return;
 
-        const today = currentTime.toLocaleString("en-US", { month: "long", day: "numeric" });
+        const eventsToday = itinerary.schedule[currentDate]?.timeline || [];
+        if (eventsToday.length === 0) {
+            setCurrentEvent(null);
+            setNextEvent(null);
+            setCountdown("No more events today");
+            return;
+        }
 
-        const eventsToday = itinerary.schedule[today]?.timeline || [];
         let now = currentTime.getHours() * 60 + currentTime.getMinutes();
-
         let current = null;
         let next = null;
 
@@ -74,7 +82,7 @@ export default function Itinerary() {
         } else {
             setCountdown("No more events today");
         }
-    }, [currentTime, itinerary]);  
+    }, [currentTime, itinerary, currentDate]);
 
     function parseTime(timeStr) {
         if (!timeStr) return 0;
@@ -86,6 +94,11 @@ export default function Itinerary() {
         const isPM = parts[3] === "PM";
 
         return (hour % 12 + (isPM ? 12 : 0)) * 60 + minute;
+    }
+
+    // 🚨 Prevent rendering if itinerary is not loaded yet
+    if (!itinerary || !itinerary.schedule) {
+        return <p className="text-center text-gray-600">Loading itinerary...</p>;
     }
 
     return (
