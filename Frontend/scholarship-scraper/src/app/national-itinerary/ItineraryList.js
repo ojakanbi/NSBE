@@ -3,10 +3,8 @@
 import { useEffect, useState } from 'react';
 
 export default function ItineraryList({ itinerary, currentDate, currentEvent, nextEvent, countdown, currentTime }) {
-    if (!itinerary) return <p className="text-center text-gray-600">Loading itinerary...</p>;
-
-    const eventsToday = itinerary.schedule[currentDate]?.timeline || [];
     const [progress, setProgress] = useState(0);
+    const eventsToday = itinerary.schedule[currentDate]?.timeline || [];
 
     // 🔄 Update progress bar for next event countdown
     useEffect(() => {
