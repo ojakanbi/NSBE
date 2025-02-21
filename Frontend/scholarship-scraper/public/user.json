@@ -4,13 +4,18 @@
     "firstname": "OJ",
     "lastname": "Akabi",
     "email": "oja5195",
+    "phonenumber": "123-456-7890",
+    "major": "Computer Science",
     "roomID": 1
+    
   },
   {
     "id": 2,
     "firstname": "Dul",
     "lastname": "Dul",
     "email": "Dul5195",
+    "phonenumber": "123-456-7890",
+    "major": "Computer Science",
     "roomID": 2
   },
   {
@@ -18,13 +23,17 @@
     "firstname": "Goody",
     "lastname": "Dul",
     "email": "goody5195",
-    "roomID": 1
+    "phonenumber": "123-456-7890",
+    "major": "Computer Science",
+    "roomID": 2
   },
   {
     "id": 4,
     "firstname": "Test",
     "lastname": "Dul",
     "email": "goody5195",
+    "phonenumber": "123-456-7890",
+    "major": "Computer Science",
     "roomID": 1
   }
 ]
