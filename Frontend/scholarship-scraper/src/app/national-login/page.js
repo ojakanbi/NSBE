@@ -91,6 +91,13 @@ export default function National() {
                             📅 View Itinerary
                         </button>
 
+                        <button 
+                            onClick={() => router .push('/national-transit')}
+                            className="w-full bg-yellow-600 text-white font-semibold py-3 rounded-lg hover:bg-yellow-700 transition duration-300 shadow-md"
+                        >
+                            🚍 View Transit
+                        </button>
+
                         {/* Logout Button */}
                         <button 
                             onClick={handleLogout}
@@ -98,6 +105,8 @@ export default function National() {
                         >
                             🚪 Logout
                         </button>
+
+
                     </div>
                 </div>
             ) : (
