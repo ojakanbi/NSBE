@@ -16,8 +16,8 @@
             "type": "travel",
             "departure_time": "12:30 AM",
             "start": {
-              "name": "White Building Gym",
-              "address": "232 Shortlidge Rd, State College, PA 16801"
+              "name": "Atherton Bus Sation",
+              "address": "152 N Atherton St, State College, PA 16801"
             },
             "destination": {
               "name": "Sheetz",
