@@ -1,5 +1,5 @@
 import { auth } from "./firebaseConfig";
-import { getFirestore, collection, doc, getDoc, query, where, getDocs } from "firebase/firestore";
+import { getFirestore, collection, doc, getDoc, query, where, getDocs, updateDoc } from "firebase/firestore";
 
 const db = getFirestore();
 
@@ -83,3 +83,21 @@ const fetchRoommates = async (roomID, currentUserEmail) => {
         return [];
     }
 };
+
+//User edit phone number
+export const updateUserPhone = async (newPhone) => {
+    const user = auth.currentUser;
+    if (!user) {
+      console.error("User is not authenticated.");
+      return;
+    }
+  
+    const userDocRef = doc(db, "students", user.uid);
+  
+    try {
+      await updateDoc(userDocRef, { phone: newPhone });
+      console.log("User phone updated successfully.");
+    } catch (error) {
+      console.error("Error updating user phone:", error);
+    }
+  };
