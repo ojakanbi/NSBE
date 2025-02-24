@@ -91,6 +91,13 @@ export default function National() {
                             📅 View Itinerary
                         </button>
 
+                        <button 
+                            onClick={() => router.push('/national-resources')}
+                            className="w-full bg-yellow-500 text-white font-semibold py-3 rounded-lg hover:bg-yellow-600 transition duration-300 shadow-md"
+                        >
+                            🔗 View NSBE25 Pre-Registration Links
+                        </button>
+
                         {/* Logout Button */}
                         <button 
                             onClick={handleLogout}
