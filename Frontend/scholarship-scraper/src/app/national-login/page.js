@@ -71,7 +71,7 @@ export default function National() {
                     {/* 🔧 Edit Profile Button */}
                     <button 
                         className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 font-semibold"
-                        onClick={() => router.push("/profile")}
+                        onClick={() => router.push("/national-profile")}
                     >
                         ✏️ Edit Profile
                     </button>
