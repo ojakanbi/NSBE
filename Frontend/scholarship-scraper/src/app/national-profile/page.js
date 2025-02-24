@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { updateUserPhone } from '../firebase/firebaseUserService';
 import BackToNational from "../components/BackToNational";
+import EmergencyFooter from "../components/Footer";
 
 export default function Profile() {
   const [phone, setPhone] = useState('');
@@ -70,6 +71,7 @@ export default function Profile() {
           )}
         </div>
       </div>
+      <EmergencyFooter />
     </div>
   );
 }

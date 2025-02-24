@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import BackToHome from '../components/BackToHomeButton';
+import BackToNational from '../components/BackToNational';
+import LoadingSpinner from '../components/Loading';
+import EmergencyFooter from '../components/Footer';
 
 export default function NationalResources() {
     const router = useRouter();
@@ -60,14 +62,14 @@ export default function NationalResources() {
     if (loading) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center">
-                <p className="text-gray-600 text-lg font-medium">Loading...</p>
+                <LoadingSpinner />
             </div>
         );
     }
 
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col items-center p-6">
-            <BackToHome />
+            <BackToNational />
             <h2 className="text-2xl font-bold text-center mb-4 text-gray-800">
                 📌 NSBE25 Pre-Registration Links
             </h2>
@@ -120,6 +122,7 @@ export default function NationalResources() {
                     </li>
                 )}
             </ul>
+            <EmergencyFooter />
         </div>
     );
 }

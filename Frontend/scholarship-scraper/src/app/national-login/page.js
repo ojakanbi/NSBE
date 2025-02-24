@@ -7,12 +7,16 @@ import { auth } from "../firebase/firebaseConfig";
 import { fetchUserData } from "../firebase/firebaseUserService";
 import BackToHome from "../components/BackToHomeButton";
 import Roomates from "../components/Roomates";
+import SuggestedComapnies from "../components/SuggestedCompanies";
+import LoadingSpinner from "../components/Loading"; 
+import EmergencyFooter from "../components/Footer";
 
 export default function National() {
     const [userData, setUserData] = useState(null);
     const [email, setEmail] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
     const router = useRouter();
 
     useEffect(() => {
@@ -28,6 +32,7 @@ export default function National() {
                 setIsLoggedIn(false);
                 setUserData(null);
             }
+            setLoading(false); // ✅ Stop loading once check is complete
         });
 
         return () => unsubscribe();
@@ -36,6 +41,7 @@ export default function National() {
     const handleLogin = async (event) => {
         event.preventDefault();
         setError(null);
+        setLoading(true); // 🔥 Show loader during login
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email + "@psu.edu", "defaultPassword123");
             const user = userCredential.user;
@@ -51,6 +57,7 @@ export default function National() {
             console.error("Login error:", error.message);
             setError("Invalid login. Please try again.");
         }
+        setLoading(false); // ✅ Stop loading after login attempt
     };
 
     const handleLogout = async () => {
@@ -62,15 +69,17 @@ export default function National() {
         router.push("/national-login");
     };
 
+    // 🔥 Show Loader while checking authentication
+    if (loading) return <LoadingSpinner />;
+
     return (
         <div className="min-h-screen w-full flex flex-col items-center p-6 bg-gray-50">
             <BackToHome />
 
             {isLoggedIn ? (
                 <div className="max-w-screen-md w-full bg-white p-6 md:p-8 rounded-2xl shadow-lg text-center relative">
-                    {/* 🔧 Edit Profile Button */}
-                    <button 
-                        className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 font-semibold"
+                    <button
+                        className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-4 py-2 text-sm font-semibold rounded-full shadow-lg hover:bg-blue-700 transition duration-300"
                         onClick={() => router.push("/national-profile")}
                     >
                         ✏️ Edit Profile
@@ -85,48 +94,31 @@ export default function National() {
                     <div className="w-full h-[2px] bg-gray-200 my-4"></div>
 
                     {/* 🏨 Roommates Section */}
-                
                     <Roomates userData={userData} />
 
                     {/* 🏢 Suggested Companies (Sliding Effect) */}
-                    <div className="bg-white p-4 rounded-lg shadow-md mb-4 border border-gray-200">
-                        <h2 className="text-lg font-semibold text-gray-700 mb-2">🏢 Suggested Companies</h2>
-                        <div className="flex space-x-3 overflow-x-auto p-2 scrollbar-hide">
-                            {userData?.suggested_companies?.length > 0 ? (
-                                userData.suggested_companies.map((company, index) => (
-                                    <div key={index} className="text-blue-500 p-3 bg-gray-100 rounded-lg shadow-md text-center min-w-[120px] border border-gray-300">
-                                        {company}
-                                    </div>
-                                ))
-                            ) : (
-                                <p className="text-sm text-gray-500">No suggestions yet.</p>
-                            )}
-                        </div>
-                    </div>
+                    <SuggestedComapnies userData={userData} />
 
-                    {/* 📅 Navigation Buttons */}
                     <div className="flex flex-col gap-4">
-                     
-
                         <button
                             onClick={() => router.push("/national-itinerary")}
                             className="w-full bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition duration-300 shadow-md"
                         >
-                            📅 View Itinerary
+                            📅 Itinerary
                         </button>
 
                         <button
                             onClick={() => router.push("/national-transit")}
                             className="w-full bg-yellow-600 text-white font-semibold py-3 rounded-lg hover:bg-yellow-700 transition duration-300 shadow-md"
                         >
-                            🚍 View Transit
+                            🚍 Transit
                         </button>
 
-                        <button 
+                        <button
                             onClick={() => router.push('/national-resources')}
                             className="w-full bg-yellow-500 text-white font-semibold py-3 rounded-lg hover:bg-yellow-600 transition duration-300 shadow-md"
                         >
-                            🔗 View NSBE25 Pre-Registration Links
+                            🔗 Pre-Registration Links
                         </button>
 
                         {/* 🚪 Logout Button */}
@@ -165,6 +157,8 @@ export default function National() {
                     </button>
                 </form>
             )}
+
+            <EmergencyFooter />
         </div>
     );
 }

@@ -71,7 +71,7 @@ export default function Home() {
         </main>
 
         {/* Fixed Footer */}
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </>
 

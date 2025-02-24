@@ -5,6 +5,8 @@ import ItineraryList from './ItineraryList';
 import FullItinerary from './FullItinerary';
 import CurrentEvent from './CurrentEvent';
 import BackToNational from '../components/BackToNational';
+import LoadingSpinner from '../components/Loading';
+import EmergencyFooter from '../components/Footer';
 
 export default function Itinerary() {
     const [itinerary, setItinerary] = useState(null);
@@ -98,10 +100,11 @@ export default function Itinerary() {
 
     // 🚨 Prevent rendering if itinerary is not loaded yet
     if (!itinerary || !itinerary.schedule) {
-        return <p className="text-center text-gray-600">Loading itinerary...</p>;
+        return <LoadingSpinner />;
     }
 
     return (
+        <>
         <div className="min-h-screen bg-gray-100 flex flex-col items-center p-6">
             <BackToNational />
 
@@ -146,6 +149,9 @@ export default function Itinerary() {
             ) : (
                 <FullItinerary itinerary={itinerary} currentDate={currentDate} />
             )}
+             <EmergencyFooter />
         </div>
+       
+        </>
     );
 }

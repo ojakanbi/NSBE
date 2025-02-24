@@ -5,6 +5,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import BackToNational from "../components/BackToNational";
+import LoadingSpinner from "../components/Loading";
+import EmergencyFooter from "../components/Footer";
 
 const stopLocation = { lat: 41.86915324015468, lng: -87.62397287426343 }; // Michigan & 11th Street
 const hotelLocation = { lat: 41.8719, lng: -87.6246 }; // Approx. hotel location
@@ -55,7 +57,7 @@ export default function BusSchedule() {
         </h2>
 
         {loading ? (
-          <p className="text-gray-500 text-center mt-4">Loading bus schedules...</p>
+            <LoadingSpinner />
         ) : busData.length === 0 ? (
           <p className="text-gray-500 text-center mt-4">No buses available.</p>
         ) : (
@@ -96,6 +98,7 @@ export default function BusSchedule() {
           </>
         )}
       </div>
+      <EmergencyFooter />
     </div>
   );
 }
