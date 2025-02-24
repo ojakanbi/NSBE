@@ -1,78 +1,45 @@
 {
-    "resources": [
-      {
-        "company": "Wells Fargo",
-        "description": "Stay connected and explore opportunities with Wells Fargo during and beyond NSBE50!",
-        "registration_link": "https://lnkd.in/eR3JD3RJ"
-        
-      },
-      {
-        "company": "Schneider Electric",
-        "description": "Pre-register for on-site interviews!",
-        "registration_link": "https://lnkd.in/edEtUZ-s"
-      },
-      {
-        "company": "Abbott",
-        "description": "Interview on-site for engineering roles across multiple disciplines.",
-        "registration_link": "https://lnkd.in/erHHMMGi"
-      },
-      {
-        "company": "GE Aerospace",
-        "description": "Career fair and networking opportunities with top engineers.",
-        "registration_link": "https://lnkd.in/eD3C3w5v"
-      },
-      {
-        "company": "ABB",
-        "description": "Meet with recruiters and explore career opportunities.",
-        "registration_link": "https://lnkd.in/e4Bdkmb8"
-      },
-      {
-        "company": "Northrop Grumman",
-        "description": "Pre-register for potential interviews.",
-        "registration_link": "https://lnkd.in/eXgkNpfa"
-      },
-      {
-        "company": "Ford Motor Company",
-        "description": "Join an exclusive virtual panel to learn about career paths before NSBE50.",
-        "registration_link": "https://lnkd.in/embJaq_a"
-      },
-      {
-        "company": "GE HealthCare",
-        "description": "Explore career opportunities at NSBE50.",
-        "registration_link": "https://lnkd.in/efghs5EC"
-      },
-      {
-        "company": "GE Vernova",
-        "description": "Career fair and networking with top engineers.",
-        "registration_link": "https://lnkd.in/eWhKFMVd"
-      },
-      {
-        "company": "The Lane Construction Corporation",
-        "description": "Explore career and internship opportunities.",
-        "registration_link": "https://lnkd.in/e-8p6nEv"
-      },
-      {
-        "company": "KBR, Inc.",
-        "description": "Connect with recruiters and explore career paths.",
-        "registration_link": "https://lnkd.in/euB8cujZ"
-      },
-      {
-        "company": "Battelle",
-        "description": "Interview and explore engineering roles on-site.",
-        "registration_link": "https://lnkd.in/ek_97r7i"
-      },
-      {
-        "company": "Merck",
-        "description": "Connect with recruiters before the event!",
-        "registration_link": "https://lnkd.in/exaufE5r"
-      },
-      {
-        "company": "Honeywell",
-        "description": "Explore career opportunities and meet recruiters.",
-        "registration_link": "https://lnkd.in/eyjhFbTw"
-      }
-    ],
-    "event": "NSBE50",
-    "note": "These companies and more will be recruiting at NSBE50, don't miss your chance to connect, interview, and land opportunities!"
-  }
-  
+  "NSBE25_Conference_Resources": [
+    {"Company": "ABB, Inc", "Link": "https://lnkd.in/e4Bdkmb8", "Description": "National Society of Black Engineers Convention 2025 | ABB"},
+    {"Company": "Abbott", "Link": "https://lnkd.in/erHHMMGi", "Description": "National Society of Black Engineers Conference | Abbott Canvas"},
+    {"Company": "Wells Fargo", "Link": "https://lnkd.in/eR3JD3RJ", "Description": "Stay connected and explore opportunities with Wells Fargo"},
+    {"Company": "Schneider Electric", "Link": "https://lnkd.in/edEtUZ-s", "Description": "Pre-register for on-site interviews"},
+    {"Company": "GE Aerospace", "Link": "https://lnkd.in/eD3C3w5v", "Description": "Career fair and networking opportunities"},
+    {"Company": "Northrop Grumman", "Link": "https://lnkd.in/eXgkNpfa", "Description": "Pre-register for potential interviews"},
+    {"Company": "Ford Motor Company", "Link": "https://lnkd.in/embJaq_a", "Description": "Exclusive virtual panel before NSBE50"},
+    {"Company": "GE HealthCare", "Link": "https://lnkd.in/efghs5EC", "Description": "Explore career opportunities at NSBE50"},
+    {"Company": "GE Vernova", "Link": "https://lnkd.in/eWhKFMVd", "Description": "Career fair and networking"},
+    {"Company": "The Lane Construction Corporation", "Link": "https://lnkd.in/e-8p6nEv", "Description": "Explore career and internship opportunities"},
+    {"Company": "KBR, Inc.", "Link": "https://lnkd.in/euB8cujZ", "Description": "Connect with recruiters and explore career paths"},
+    {"Company": "Battelle", "Link": "https://lnkd.in/ek_97r7i", "Description": "Interview and explore engineering roles"},
+    {"Company": "Merck", "Link": "https://lnkd.in/exaufE5r", "Description": "Connect with recruiters before the event"},
+    {"Company": "Honeywell", "Link": "https://lnkd.in/eyjhFbTw", "Description": "Explore career opportunities and meet recruiters"},
+    {"Company": "BNY Mellon", "Link": "https://eofe.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/63487/?utm_source=%20LINSBE2025&utm_medium=jobshare", "Description": "Job opportunity at BNY Mellon"},
+    {"Company": "Capital One, Inc.", "Link": "https://capitalone.eightfold.ai/events/candidate/landing?plannedEventId=Z7lpEQ07", "Description": "Pre-register for Capital One events"},
+    {"Company": "Ford Motor Company", "Link": "https://lnkd.in/embJaq_a", "Description": "Join an exclusive virtual panel"},
+    {"Company": "GE Aerospace", "Link": "https://lnkd.in/eD3C3w5v", "Description": "NSBE 2025 National Convention"},
+    {"Company": "GE Appliances, a Haier company", "Link": "https://app.ripplematch.com/v2/public/event/daf3afea", "Description": "Career opportunities"},
+    {"Company": "GE HealthCare", "Link": "https://lnkd.in/efghs5EC", "Description": "NSBE Convention | GE HealthCare"},
+    {"Company": "GE Vernova", "Link": "https:// nkd.in/eWhKFMVd", "Description": "NSBE 2025 National Convention & Career Fair"},
+    {"Company": "Honeywell", "Link": "https://lnkd.in/eyjhFbTw", "Description": "NSBE 2025 National Convention"},
+    {"Company": "HP Inc", "Link": "https://hp.zoom.us/meeting/register/e_92knpBQAK7S_Q_GDyRNw?optimizely_user_id=ddcde393e30543959b749ee42ab25101#/registration", "Description": "Register for HP NSBE event"},
+    {"Company": "Johnson & Johnson Family of Companies", "Link": "https://flows.beamery.com/jnj/nsbe-webinar-2025?utm_medium=email&_hsmi=343699840&utm_content=343699840&utm_source=hs_email", "Description": "NSBE webinar registration"},
+    {"Company": "KBR, Inc.", "Link": "https://lnkd.in/euB8cujZ", "Description": "NSBE Conference | KBR"},
+    {"Company": "Lane Construction Corporation", "Link": "https://www.laneconstruct.com/events/national-society-of-black-engineers/", "Description": "NSBE 2025 Career Fair"},
+    {"Company": "Lenovo", "Link": "https://lenovohr.formstack.com/forms/lenovo_nsbe25", "Description": "Pre-register for Lenovo NSBE event"},
+    {"Company": "McKinsey & Company", "Link": "https://lnkd.in/bbbbb", "Description": "NSBE event details"},
+    {"Company": "Merck & Co., Inc.", "Link": "https://lnkd.in/exaufE5r", "Description": "NSBE 51st Annual Convention"},
+    {"Company": "Micron Technology", "Link": "https://micron.eightfold.ai/events/candidate?plannedEventId=bzR14mp7", "Description": "Micron pre-registration"},
+    {"Company": "Microsoft", "Link": "https://careers.microsoft.com/v2/global/en/nsbe.html", "Description": "Microsoft Careers NSBE"},
+    {"Company": "Northrop Grumman Corporation, Inc.", "Link": "https://lnkd.in/eXgkNpfa", "Description": "Pre-register for Northrop Grumman"},
+    {"Company": "NVIDIA", "Link": "https://nvidia.eightfold.ai/events/candidate?plannedEventId=6BEJXDXRj", "Description": "Pre-register for NVIDIA NSBE"},
+    {"Company": "Pfizer, Inc.", "Link": "https://www.linkedin.com/posts/activity-7298345267739701248-9yzj/?utm_source=share&utm_medium=member_ios&rcm=ACoAADLVslsB435ANZR0ls2ZW5mG58ezJyv93jI", "Description": "Pfizer NSBE event"},
+    {"Company": "Schneider-Electric", "Link": "https://lnkd.in/edEtUZ-s", "Description": "Pre-register for Schneider Electric"},
+    {"Company": "Southern Company", "Link": "https://urlisolation.com/browser?clickId=B93828EB-CD3F-4A28-910D-D553D8BEF805&traceToken=1740415458%3Bwestrock_2_hosted%3Bhttps%3A%2Femail.recsolu.com%2Fss%2Fc%2Fu0&url=https%3A%2F%2Femail.recsolu.com%2Fss%2Fc%2Fu001.Chpd23Jcl9TUIOD5PUEcw7l33wvohYBJsRt609ZUurOa9X1Exhpv6nkBO3gq6CBZ%2F4dt%2FO_hUxr4gTTGKaKA_513zVg%2Fh8%2Fh001.ayh4t60w4elfJ6nfJFx9oeAeopEwbUiNoe4I0JB1sCU", "Description": "Pre-register for Southern Company"},
+    {"Company": "Trane Technologies, Inc.", "Link": "https://www.laneconstruct.com/events/national-society-of-black-engineers/", "Description": "NSBE 2025 Career Fair with Trane Technologies"},
+    {"Company": "UPS", "Link": "https://app.joinhandshake.com/stu/events/1698045", "Description": "Pre-register for UPS event"},
+    {"Company": "WL Gore", "Link": "https://forms.office.com/pages/responsepage.aspx?id=zAHoiyb3sEmYPEDSGlG-NCR43nE7eOFBme0Xo2noxn1UQzc2UFRKMkVRNklaRlJXTk9WRjZKSERDSiQlQCN0PWcu", "Description": "Pre-register for WL Gore event"},
+    {"Company": "Lenovo", "Link": "https://lenovohr.formstack.com/forms/lenovo_nsbe25", "Description": "Interview request form"},
+    {"Company": "Eaton", "Link": "https://www.eaton.com/us/en-us/company/careers/experienced-professionals/eaton-at-nsbe.html", "Description": "Register now, job applications open March 3rd"}
+]
+}
