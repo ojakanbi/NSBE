@@ -40,3 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+/src/app/firebase/students_data.json
+/src/app/firebase/upload_students_firebase.js
+
+/src/app/firebase/serviceAccountKey.json
+
