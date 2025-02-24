@@ -19,7 +19,7 @@ const firebaseConfig = {
 };
 
 
-console.log("🔥 Initializing Firebase... ", firebaseConfig);
+// console.log("🔥 Initializing Firebase... ", firebaseConfig);
 
 
 // Initialize Firebase

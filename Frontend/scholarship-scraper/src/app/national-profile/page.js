@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { updateUserPhone } from '../firebase/firebaseUserService';
 import BackToNational from "../components/BackToNational";
 import EmergencyFooter from "../components/Footer";
+import QuickSurvey from '../components/QuickSurvey';
 
 export default function Profile() {
   const [phone, setPhone] = useState('');
@@ -70,6 +71,7 @@ export default function Profile() {
             </p>
           )}
         </div>
+        <QuickSurvey/>
       </div>
       <EmergencyFooter />
     </div>

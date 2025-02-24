@@ -16,7 +16,13 @@ const geistMono = localFont({
 export const metadata = {
   title: "NSBE PSU",
   description: "NSBE PSU Chapter",
+  icons: [
+    { rel: "icon", url: "/nsbe-logo.png" },
+    { rel: "shortcut icon", url: "/nsbe-logo.png" },
+    { rel: "apple-touch-icon", url: "/nsbe-logo.png" },
+  ],
 };
+
 
 export default function RootLayout({ children }) {
   return (

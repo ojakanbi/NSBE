@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const emergencyContacts = [
     { name: "Dr. Grigs", role: "Faculty Advisor", phone: "814-865-6613." },
     { name: "Nate Ansu", role: "Conference Planning Chair", phone: "484-773-6383" },
-    { name: "Ben", role: "NSBE Executive", phone: "708-603-3084" }
+    { name: "Ben", role: "Prez", phone: "708-603-3084" }
 ];
 
 export default function EmergencyFooter() {
