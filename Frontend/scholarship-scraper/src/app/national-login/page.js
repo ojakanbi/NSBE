@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig";
-import { fetchUserData } from "../firebase/firebaseUserService";
+import { fetchUserData, updateUserPhone } from "../firebase/firebaseUserService"; // Update function
 import BackToHome from "../components/BackToHomeButton";
 import Roomates from "../components/Roomates";
 import SuggestedComapnies from "../components/SuggestedCompanies";
 import LoadingSpinner from "../components/Loading"; 
 import EmergencyFooter from "../components/Footer";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function National() {
     const [userData, setUserData] = useState(null);
@@ -17,6 +18,9 @@ export default function National() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [phoneNumberSet, setPhoneNumberSet] = useState(true);
+    const [showPhoneModal, setShowPhoneModal] = useState(false);
+    const [phoneNumber, setPhoneNumber] = useState("");
     const router = useRouter();
 
     useEffect(() => {
@@ -27,12 +31,18 @@ export default function National() {
                     setUserData(userInfo);
                     setIsLoggedIn(true);
                     localStorage.setItem("user", JSON.stringify(userInfo));
+                    
+                    // Check if phone number is missing
+                    if (!userInfo.phone || userInfo.phone === "not provided") {
+                        setPhoneNumberSet(false);
+                        setShowPhoneModal(true);
+                    }
                 }
             } else {
                 setIsLoggedIn(false);
                 setUserData(null);
             }
-            setLoading(false); // ✅ Stop loading once check is complete
+            setLoading(false);
         });
 
         return () => unsubscribe();
@@ -41,7 +51,7 @@ export default function National() {
     const handleLogin = async (event) => {
         event.preventDefault();
         setError(null);
-        setLoading(true); // 🔥 Show loader during login
+        setLoading(true);
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email + "@psu.edu", "defaultPassword123");
             const user = userCredential.user;
@@ -50,6 +60,11 @@ export default function National() {
                 setUserData(userInfo);
                 setIsLoggedIn(true);
                 localStorage.setItem("user", JSON.stringify(userInfo));
+
+                if (!userInfo.phone || userInfo.phone === "not provided") {
+                    setPhoneNumberSet(false);
+                    setShowPhoneModal(true);
+                }
             } else {
                 throw new Error("User data not found.");
             }
@@ -57,7 +72,7 @@ export default function National() {
             console.error("Login error:", error.message);
             setError("Invalid login. Please try again.");
         }
-        setLoading(false); // ✅ Stop loading after login attempt
+        setLoading(false);
     };
 
     const handleLogout = async () => {
@@ -69,7 +84,28 @@ export default function National() {
         router.push("/national-login");
     };
 
-    // 🔥 Show Loader while checking authentication
+    const handleUpdateNumber = async () => {
+        if (!phoneNumber.trim()) return;
+
+        // Check if phone number is in the right format
+        const phoneRegex = /^\d{10}$/;
+        if (!phoneRegex.test(phoneNumber)) {
+            console.error("Invalid phone number format");
+            setError("Please enter a valid 10-digit phone number (e.g., 1234567890).");
+            return;
+        }
+
+        try {
+            setError(null);
+            await updateUserPhone(phoneNumber); // Update Firestore
+            setUserData((prev) => ({ ...prev, phone: phoneNumber }));
+            setPhoneNumberSet(true);
+            setShowPhoneModal(false);
+        } catch (error) {
+            console.error("Error updating phone number:", error);
+        }
+    };
+
     if (loading) return <LoadingSpinner />;
 
     return (
@@ -159,6 +195,34 @@ export default function National() {
             )}
 
             <EmergencyFooter />
+
+            {/* 📌 Phone Number Input Modal */}
+            <AnimatePresence>
+                {showPhoneModal && (
+                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                        <motion.div
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3 }}
+                            className="bg-white rounded-lg shadow-lg p-6 w-96 text-center"
+                        >
+                            <h2 className="text-lg font-bold text-gray-700 mb-4">📞 Enter Your Phone Number</h2>
+                            <input
+                                type="tel"
+                                className="border rounded-md p-2 w-full"
+                                placeholder="Your phone number"
+                                value={phoneNumber}
+                                onChange={(e) => setPhoneNumber(e.target.value)}
+                            />
+                            {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+                            <button onClick={handleUpdateNumber} className="bg-blue-600 text-white py-2 px-4 mt-4 rounded-md">
+                                Save
+                            </button>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }
