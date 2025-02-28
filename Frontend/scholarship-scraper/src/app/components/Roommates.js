@@ -1,4 +1,4 @@
-export default function Roomates({userData}) {
+export default function Roommates({userData}) {
 
     return (
         <div className="bg-white p-4 rounded-lg shadow-md mb-4 border border-gray-200">
