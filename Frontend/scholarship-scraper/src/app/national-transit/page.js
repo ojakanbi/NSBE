@@ -1,9 +1,8 @@
-'use client';
+"use client";
+
 import { useEffect, useState } from "react";
-import { GoogleMap, Marker } from "@react-google-maps/api";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import { motion, AnimatePresence } from "framer-motion";
 import BackToNational from "../components/BackToNational";
 import LoadingSpinner from "../components/Loading";
 import EmergencyFooter from "../components/Footer";
@@ -16,18 +15,29 @@ const mapContainerStyle = { width: "100%", height: "400px", borderRadius: "10px"
 export default function BusSchedule() {
   const [busData, setBusData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Google Maps API Loader
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+  });
 
   useEffect(() => {
     async function fetchBusData() {
       try {
         const response = await fetch("/api/transit");
+        if (!response.ok) throw new Error("Failed to fetch bus data.");
         const data = await response.json();
         if (data.data) {
           setBusData(data.data);
           console.log("🚌 Bus data fetched:", data.data);
+        } else {
+          throw new Error("No bus data available.");
         }
       } catch (error) {
-        console.error("Error fetching bus data:", error);
+        console.error("Error fetching bus data:", error.message);
+        setError(error.message);
       } finally {
         setLoading(false);
       }
@@ -38,14 +48,12 @@ export default function BusSchedule() {
     return () => clearInterval(interval);
   }, []);
 
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000,
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % busData.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + busData.length) % busData.length);
   };
 
   return (
@@ -56,45 +64,88 @@ export default function BusSchedule() {
           🚌 Next Buses from Hotel to Convention Center
         </h2>
 
-        {loading ? (
+        {/* 🔄 Loading State */}
+        {loading && (
+          <div className="flex flex-col items-center justify-center h-40">
             <LoadingSpinner />
-        ) : busData.length === 0 ? (
-          <p className="text-gray-500 text-center mt-4">No buses available.</p>
-        ) : (
-          <>
-            {/* Google Maps */}
-            <GoogleMap mapContainerStyle={mapContainerStyle} center={stopLocation} zoom={14}>
-              <Marker position={hotelLocation} label="🏨 Hotel" />
-              <Marker position={stopLocation} label="🚌 Bus Stop" />
-              <Marker position={conventionCenter} label="🏛️ Convention Center" />
-            </GoogleMap>
+            <p className="text-gray-500 mt-2">Loading bus schedules...</p>
+          </div>
+        )}
 
-            {/* Bus Schedule Carousel */}
-            <Slider {...sliderSettings} className="mt-6">
-              {busData.map((bus, index) => (
-                <div key={index} className="p-4 bg-gray-100 rounded-lg shadow-md text-center">
+        {/* ❌ Error State */}
+        {error && !loading && (
+          <div className="text-center text-red-500 mt-4">
+            <p>⚠️ {error}</p>
+          </div>
+        )}
+
+        {/* ✅ Bus Data Display */}
+        {!loading && !error && busData.length === 0 && (
+          <p className="text-gray-500 text-center mt-4">No buses available.</p>
+        )}
+
+        {!loading && !error && busData.length > 0 && (
+          <>
+            {/* Google Maps (Only Render When Loaded) */}
+            {isLoaded ? (
+              <GoogleMap mapContainerStyle={mapContainerStyle} center={stopLocation} zoom={14}>
+                <Marker position={hotelLocation} label="🏨 Hotel" />
+                <Marker position={stopLocation} label="🚌 Bus Stop" />
+                <Marker position={conventionCenter} label="🏛️ Convention Center" />
+              </GoogleMap>
+            ) : (
+              <div className="text-gray-500 text-center mt-4">📍 Loading map...</div>
+            )}
+
+            {/* Custom Bus Schedule Carousel */}
+            <div className="relative w-full mt-6">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ duration: 0.5 }}
+                  className="p-4 bg-gray-100 rounded-lg shadow-md text-center"
+                >
                   <h2 className="text-xl font-bold text-blue-600">
-                    {bus.route_short_name} - {bus.route_name}
+                    {busData[currentIndex].route_short_name} - {busData[currentIndex].route_name}
                   </h2>
                   <p className="text-gray-600">
                     🚏 Stop:{" "}
-                    <a href={bus.google_maps_url} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
-                      {bus.stop_name}
+                    <a href={busData[currentIndex].google_maps_url} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+                      {busData[currentIndex].stop_name}
                     </a>
                   </p>
-                  <p className="text-gray-600">📍 Direction: {bus.headsign}</p>
+                  <p className="text-gray-600">📍 Direction: {busData[currentIndex].headsign}</p>
                   <p className="text-gray-600">🕒 Estimated Travel Time: ~12 min</p>
                   <p className="text-gray-600">
                     ⏳ Departure:{" "}
                     <span className="font-semibold text-green-600">
-                      {new Date(bus.departure_time * 1000).toLocaleTimeString("en-US", {
+                      {new Date(busData[currentIndex].departure_time * 1000).toLocaleTimeString("en-US", {
                         timeZone: "America/Chicago",
                       }).replace(/:\d+ /, ' ')}
                     </span>
                   </p>
-                </div>
-              ))}
-            </Slider>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Carousel Navigation */}
+              <div className="flex justify-between mt-4">
+                <button
+                  onClick={prevSlide}
+                  className="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-900 transition"
+                >
+                  ◀ Prev
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-900 transition"
+                >
+                  Next ▶
+                </button>
+              </div>
+            </div>
           </>
         )}
       </div>
@@ -102,3 +153,4 @@ export default function BusSchedule() {
     </div>
   );
 }
+

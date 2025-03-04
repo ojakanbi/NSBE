@@ -5,9 +5,9 @@ export default function FullItinerary({ itinerary, currentDate }) {
     const itineraryDays = Object.keys(itinerary.schedule);
     const [selectedDayIndex, setSelectedDayIndex] = useState(itineraryDays.indexOf(currentDate) || 0);
     if (!itinerary) return <p className="text-center text-gray-600">Loading itinerary...</p>;
-    
 
-  
+
+
 
     const handleNextDay = () => {
         if (selectedDayIndex < itineraryDays.length - 1) {
@@ -82,6 +82,22 @@ export default function FullItinerary({ itinerary, currentDate }) {
                                 <p className="text-gray-700">{item.description}</p>
                             </div>
                         )}
+
+                        {item.type === "check-out" && (
+                            <div>
+                                <p className="text-yellow-600 font-medium">👋 Check Out - {item.time}</p>
+                                <p className="text-gray-700">{item.description}</p>
+                            </div>
+                        )}
+
+
+                        {item.type === "volunteering" && (
+                            <div>
+                                <p className="text-yellow-600 font-medium">🧑‍🧑‍🧒 Volunteering - {item.time}</p>
+                                <p className="text-gray-700">{item.description}</p>
+                            </div>
+                        )}
+
 
                         {/* Event Section */}
                         {item.type === "event" && (

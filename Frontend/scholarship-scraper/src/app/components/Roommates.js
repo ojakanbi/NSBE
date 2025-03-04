@@ -1,8 +1,9 @@
-export default function Roomates({userData}) {
+export default function Roommates({userData}) {
 
     return (
         <div className="bg-white p-4 rounded-lg shadow-md mb-4 border border-gray-200">
             <h2 className="text-lg font-semibold text-gray-700 mb-2">🏨 Your Roommates</h2>
+            <p className="text-sm text-gray-500 mb-2">Make that group chat!</p>
             <div className="flex space-x-3 overflow-x-auto p-2 scrollbar-hide">
                 {userData?.roommates?.length > 0 ? (
                     userData.roommates.map((mate, index) => (

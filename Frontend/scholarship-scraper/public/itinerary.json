@@ -1,108 +1,308 @@
 {
-    "conference": "Penn State NSBE Chicago Conference",
-    "dates": {
-      "start": "March 5, 2025",
-      "end": "March 9, 2025"
+  "conference": "Penn State NSBE Chicago Conference",
+  "dates": {
+    "start": "March 5, 2025",
+    "end": "March 9, 2025"
+  },
+  "schedule": {
+    "March 5": {
+      "summary": [
+        "Leaving Penn State for Chicago",
+        "Checking in to the Hotel",
+        "Attending Opening Ceremony"
+      ],
+      "timeline": [
+        {
+          "type": "travel",
+          "departure_time": "12:30 AM",
+          "start": {
+            "name": "Atherton Bus Sation",
+            "address": "152 N Atherton St, State College, PA 16801"
+          },
+          "destination": {
+            "name": "Sheetz",
+            "address": "9037 Pearl Rd, Strongsville, OH 44136"
+          },
+          "drive_time": "4 hrs 30 mins",
+          "expected_arrival": "5:00 AM",
+          "notes": "Driver takes 2, 10 min breaks"
+        },
+        {
+          "type": "break",
+          "duration": "1 hr",
+          "description": "Rest break at Sheetz"
+        },
+        {
+          "type": "travel",
+          "departure_time": "6:00 AM",
+          "start": {
+            "name": "Sheetz",
+            "address": "9037 Pearl Rd, Strongsville, OH 44136"
+          },
+          "destination": {
+            "name": "Ernie Pyle Travel Plaza Westbound",
+            "address": "7065 N 475 E, Howe, IN 46746"
+          },
+          "drive_time": "3 hrs 30 mins",
+          "expected_arrival": "9:30 AM",
+          "notes": "Driver takes 2, 10 min breaks"
+        },
+        {
+          "type": "break",
+          "duration": "2 hrs",
+          "description": "Lunch break"
+        },
+        {
+          "type": "travel",
+          "departure_time": "11:30 AM",
+          "start": {
+            "name": "Ernie Pyle Travel Plaza Westbound",
+            "address": "7065 N 475 E, Howe, IN 46746"
+          },
+          "destination": {
+            "name": "Conference Check-In",
+            "address": "2317 S Indiana Ave, Chicago, IL 60616"
+          },
+          "drive_time": "2 hrs 45 mins",
+          "expected_arrival": "2:15 PM",
+          "notes": "Driver takes 1 break"
+        },
+        {
+          "type": "travel",
+          "departure_time": "2:50 PM",
+          "start": {
+            "name": "Conference Check-In",
+            "address": "2317 S Indiana Ave, Chicago, IL 60616"
+          },
+          "destination": {
+            "name": "Best Western Grant Park Hotel",
+            "address": "1100 S Michigan Ave, Chicago, IL"
+          },
+          "drive_time": "10 mins",
+          "expected_arrival": "3:00 PM"
+        },
+        {
+          "type": "check-in",
+          "time": "3:00 PM",
+          "location": "Best Western Grant Park Hotel",
+          "description": "Hotel Check-In"
+        },
+        {
+          "type": "event",
+          "time": "11:25 PM",
+          "name": "Opening Ceremony",
+          "end_time": "9:00 PM",
+          "required": true
+        },
+        {
+          "type": "event",
+          "time": "11:31 PM",
+          "name": "Hospitality Suites/Interviews",
+          "end_time": "11:59 PM",
+          "required": false
+        }
+      ]
     },
-    "schedule": {
-      "March 5": {
-        "summary": [
-          "Leaving Penn State for Chicago",
-          "Checking in to the Hotel",
-          "Attending Opening Ceremony"
-        ],
-        "timeline": [
-          {
-            "type": "travel",
-            "departure_time": "12:30 AM",
-            "start": {
-              "name": "Atherton Bus Sation",
-              "address": "152 N Atherton St, State College, PA 16801"
-            },
-            "destination": {
-              "name": "Sheetz",
-              "address": "9037 Pearl Rd, Strongsville, OH 44136"
-            },
-            "drive_time": "4 hrs 30 mins",
-            "expected_arrival": "5:00 AM",
-            "notes": "Driver takes 2, 10 min breaks"
-          },
-          {
-            "type": "break",
-            "duration": "1 hr",
-            "description": "Rest break at Sheetz"
-          },
-          {
-            "type": "travel",
-            "departure_time": "6:00 AM",
-            "start": {
-              "name": "Sheetz",
-              "address": "9037 Pearl Rd, Strongsville, OH 44136"
-            },
-            "destination": {
-              "name": "Ernie Pyle Travel Plaza Westbound",
-              "address": "7065 N 475 E, Howe, IN 46746"
-            },
-            "drive_time": "3 hrs 30 mins",
-            "expected_arrival": "9:30 AM",
-            "notes": "Driver takes 2, 10 min breaks"
-          },
-          {
-            "type": "break",
-            "duration": "2 hrs",
-            "description": "Lunch break"
-          },
-          {
-            "type": "travel",
-            "departure_time": "11:30 AM",
-            "start": {
-              "name": "Ernie Pyle Travel Plaza Westbound",
-              "address": "7065 N 475 E, Howe, IN 46746"
-            },
-            "destination": {
-              "name": "Conference Check-In",
-              "address": "2317 S Indiana Ave, Chicago, IL 60616"
-            },
-            "drive_time": "2 hrs 45 mins",
-            "expected_arrival": "2:15 PM",
-            "notes": "Driver takes 1 break"
-          },
-          {
-            "type": "travel",
-            "departure_time": "2:50 PM",
-            "start": {
-              "name": "Conference Check-In",
-              "address": "2317 S Indiana Ave, Chicago, IL 60616"
-            },
-            "destination": {
-              "name": "Best Western Grant Park Hotel",
-              "address": "1100 S Michigan Ave, Chicago, IL"
-            },
-            "drive_time": "10 mins",
-            "expected_arrival": "3:00 PM"
-          },
-          {
-            "type": "check-in",
-            "time": "3:00 PM",
-            "location": "Best Western Grant Park Hotel",
-            "description": "Hotel Check-In"
-          },
-          {
-            "type": "event",
-            "time": "11:25 PM",
-            "name": "Opening Ceremony",
-            "end_time": "9:00 PM",
-            "required": true
-          },
-          {
-            "type": "event",
-            "time": "11:31 PM",
-            "name": "Hospitality Suites/Interviews",
-            "end_time": "11:59 PM",
-            "required": false
-          }
-        ]
+    "March 6": {
+      "summary": [
+        "Attending Mandatory Opening Session",
+        "Attending Career Fair",
+        "Attending Mandatory General Session"
+      ],
+      "timeline": [
+        {
+          "type": "event",
+          "time": "8:00 AM",
+          "name": "Mandatory Opening Session",
+          "description": "Opening session of the day.",
+          "required": true
+        },
+        {
+          "type": "event",
+          "time": "10:00 AM",
+          "name": "Career Fair (APex)",
+          "description": "Early access to the career fair for APex attendees.",
+          "required": false
+        },
+        {
+          "type": "event",
+          "time": "11:00 AM",
+          "name": "Career Fair",
+          "description": "Career fair opens to all attendees.",
+          "required": false
+        },
+        {
+          "type": "event",
+          "time": "6:00 PM",
+          "name": "Mandatory General Session",
+          "description": "Closing general session of the day.",
+          "required": true
+        }
+      ]
+    },
+    "March 7": {
+      "summary": [
+        "Attending Mandatory Opening Session",
+        "Attending Career Fair",
+        "Attending Mandatory General Session",
+        "Attending Chapter Dinner at Weather Mark Tavern"
+      ],
+      "timeline": [
+        {
+          "type": "event",
+          "time": "8:00 AM",
+          "name": "Mandatory Opening Session",
+          "description": "Opening session of the day.",
+          "required": true
+        },
+        {
+          "type": "event",
+          "time": "10:00 AM",
+          "name": "Career Fair (APex)",
+          "description": "Early access to the career fair for APex attendees.",
+          "required": false
+        },
+        {
+          "type": "event",
+          "time": "11:00 AM",
+          "name": "Career Fair",
+          "description": "Career fair opens to all attendees.",
+          "required": false
+        },
+        {
+          "type": "event",
+          "time": "6:00 PM",
+          "name": "Mandatory General Session",
+          "description": "Closing general session of the day.",
+          "required": true
+        },
+        {
+          "type": "event",
+          "time": "7:00 PM",
+          "name": "Mandatory Chapter Dinner",
+          "location": "Weather Mark Tavern",
+          "description": "Alumni dinner with chapter members.",
+          "required": true
+        }
+      ]
+    },
+    "March 8": {
+      "summary": [
+        "Attending Mandatory Opening Session",
+        "Attending Golden Torch Awards"
+      ],
+      "timeline": [
+        {
+          "type": "event",
+          "time": "8:00 AM",
+          "name": "Mandatory Opening Session",
+          "description": "Opening session of the day.",
+          "required": true
+        },
+        {
+          "type": "event",
+          "time": "5:30 PM",
+          "name": "Mandatory Golden Torch Awards",
+          "description": "Awards ceremony recognizing outstanding achievements.",
+          "required": true
+        }
+      ]
+    },
+    "March 9": {
+    "summary": [
+      "Hotel Check-Out",
+      "Volunteering at Cardz for Kidz",
+      "Bus Trip Back to State College"
+    ],
+    "timeline": [
+      {
+        "type": "check-out",
+        "time": "10:00 AM",
+        "location": "Best Western Grant Park Hotel",
+        "address": "1100 S Michigan Ave, Chicago, IL",
+        "description": "Check out of the hotel before departure."
+      },
+      {
+        "type": "travel",
+        "departure_time": "10:00 AM",
+        "start": {
+          "name": "Best Western Grant Park Hotel",
+          "address": "1100 S Michigan Ave, Chicago, IL"
+        },
+        "destination": {
+          "name": "Cardz for Kidz",
+          "address": "4416 N Clark St, Chicago, IL 60640"
+        },
+        "drive_time": "1 hr",
+        "expected_arrival": "11:00 AM"
+      },
+      {
+        "type": "volunteering",
+        "time": "11:00 AM - 2:00 PM",
+        "name": "Cardz for Kidz",
+        "location": "4416 N Clark St, Chicago, IL 60640",
+        "description": "Volunteer activity at Cardz for Kidz organization."
+      },
+      {
+        "type": "travel",
+        "departure_time": "2:00 PM",
+        "start": {
+          "name": "Cardz for Kidz",
+          "address": "4416 N Clark St, Chicago, IL 60640"
+        },
+        "destination": {
+          "name": "Ernie Pyle Travel Plaza Westbound",
+          "address": "7065 N 475 E, Howe, IN 46746"
+        },
+        "drive_time": "3 hrs",
+        "expected_arrival": "5:00 PM",
+        "notes": "Driver takes 2, 10 min breaks."
+      },
+      {
+        "type": "break",
+        "time": "5:00 PM - 7:00 PM",
+        "duration": "2 hrs",
+        "location": "Ernie Pyle Travel Plaza Westbound",
+        "description": "Long break before continuing the trip."
+      },
+      {
+        "type": "travel",
+        "departure_time": "7:00 PM",
+        "start": {
+          "name": "Ernie Pyle Travel Plaza Westbound",
+          "address": "7065 N 475 E, Howe, IN 46746"
+        },
+        "destination": {
+          "name": "Sheetz",
+          "address": "9037 Pearl Rd, Strongsville, OH 44136"
+        },
+        "drive_time": "2 hrs 45 mins",
+        "expected_arrival": "7:45 PM",
+        "notes": "Driver takes 1, 10 min break."
+      },
+      {
+        "type": "break",
+        "time": "7:45 PM - 8:45 PM",
+        "duration": "1 hr",
+        "location": "Sheetz",
+        "description": "Break at Sheetz before continuing the journey."
+      },
+      {
+        "type": "travel",
+        "departure_time": "8:45 PM",
+        "start": {
+          "name": "Sheetz",
+          "address": "9037 Pearl Rd, Strongsville, OH 44136"
+        },
+        "destination": {
+          "name": "N Atherton Bus Depot",
+          "address": "152 N Atherton St, State College, PA 16801"
+        },
+        "drive_time": "4 hrs 30 mins",
+        "expected_arrival": "1:15 AM",
+        "notes": "Driver takes 2, 10 min breaks."
       }
-    }
+    ]
   }
-  
+  }
+}
