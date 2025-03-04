@@ -16,6 +16,7 @@ const images = [
   "/brochure/8.png",
   "/brochure/9.png",
   "/brochure/10.png",
+"/brochure/11.png",
 ];
 
 export default function ImageCarousel() {

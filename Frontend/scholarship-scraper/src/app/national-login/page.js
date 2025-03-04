@@ -183,7 +183,7 @@ export default function National() {
                 {isLoggedIn ? (
                     <div className="max-w-screen-md w-full bg-white p-6 md:p-8 rounded-2xl shadow-lg relative mt-6">
                         <h1 className="text-3xl font-extrabold text-blue-700 mb-1">
-                            Hey {userData?.firstname}!
+                            Oh hey, {userData?.firstname}!
                         </h1>
                         <p className="text-gray-500 text-sm">{userData?.major}</p>
 

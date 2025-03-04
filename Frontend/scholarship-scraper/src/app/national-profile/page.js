@@ -34,7 +34,7 @@ export default function Profile() {
             return;
         }
         try {
-            await updateUserPhoneNumber(userData.email, formattedPhone);
+            await updateUserPhone(userData.email, formattedPhone);
             setPhone(formattedPhone);
             setMessage('✅ Phone updated successfully!');
         } catch (error) {
@@ -83,7 +83,7 @@ export default function Profile() {
                 </div>
             </div>
 
-            <QuickSurvey />
+        
             <EmergencyFooter />
         </div>
     );
