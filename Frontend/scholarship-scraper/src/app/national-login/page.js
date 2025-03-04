@@ -155,6 +155,12 @@ export default function National() {
                                             Pre-Registration Links
                                         </button>
                                         <button
+                                            onClick={() => router.push("/national-expense")}
+                                            className="block w-full text-left px-4 py-3 bg-blue-900 text-white hover:bg-yellow-600 transition"
+                                        >
+                                            Split Expense
+                                        </button>
+                                        <button
                                             onClick={handleLogout}
                                             className="block w-full text-left px-4 py-3 bg-red-600 text-white hover:bg-red-700 transition"
                                         >
