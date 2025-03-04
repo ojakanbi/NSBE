@@ -13,6 +13,7 @@ import LoadingSpinner from "../components/Loading";
 import EmergencyFooter from "../components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react"; // Icons for menu
+import ImageCarousel from "../components/ImageCarousel";
 
 export default function National() {
     const [userData, setUserData] = useState(null);
@@ -182,12 +183,15 @@ export default function National() {
 
                         <div className="w-full h-[2px] bg-gray-200 my-4"></div>
 
-                        {/* 🏨 Roommates Section */}
-                        <Roommates userData={userData} />
+                        <ImageCarousel />
+
+                    
                         {/* 🏢 Suggested Companies */}
                         <SuggestedCompanies userData={userData} />
                         {/* 📅 Recommended Workshops */}
                         <SuggestedWorkshops userData={userData} />
+                         {/* 🏨 Roommates Section */}
+                         <Roommates userData={userData} />
                     </div>
                 ) : (
                     <form onSubmit={handleLogin} className="max-w-sm w-full bg-white p-6 rounded-2xl shadow-lg mt-6">
