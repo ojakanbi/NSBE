@@ -1,5 +1,5 @@
 import { auth } from "./firebaseConfig";
-import { getFirestore, collection, doc, getDoc, query, where, getDocs, updateDoc } from "firebase/firestore";
+import { getFirestore, collection, doc, getDoc, query, where, getDocs, updateDoc, addDoc, deleteDoc} from "firebase/firestore";
 
 const db = getFirestore();
 
@@ -101,3 +101,126 @@ export const updateUserPhone = async (newPhone) => {
       console.error("Error updating user phone:", error);
     }
   };
+
+
+  export const splitExpense = async (users, amount, expenseCategory, description) => { 
+    const user = auth.currentUser;
+    if (!user) {
+        console.error("User is not authenticated");
+        return false;
+    }
+
+    const totalUsers = users.length + 1; // Include the payer
+    const splitAmount = amount / totalUsers;
+
+    // ✅ Store names & emails in `users` AND store only emails in `userEmails`
+    const participants = [
+        { email: user.email, name: "(Payer)" }, // Include the payer
+        ...users.map(u => ({
+            email: u.email,
+            name: `${u.firstname} ${u.lastname}`
+        }))
+    ];
+
+    const userEmails = participants.map(u => u.email); // Extract emails
+
+    const expense = {
+        amount: amount,
+        category: expenseCategory,
+        description: description,
+        paidBy: user.email,
+        splitAmount: splitAmount,
+        users: participants, // ✅ Store names & emails
+        userEmails: userEmails, // ✅ Store only emails for Firestore querying
+        createdAt: new Date(),
+    };
+
+    try {
+        const expenseRef = collection(db, "expenses");
+        await addDoc(expenseRef, expense);
+        console.log("✅ Expense added successfully.");
+        return true;
+    } catch (error) {
+        console.error("❌ Error adding expense:", error);
+        return false;
+    }
+};
+
+
+export const fetchUserExpenses = async () => {
+    const user = auth.currentUser;
+    if (!user) {
+        console.error("User is not authenticated");
+        return [];
+    }
+
+    try {
+        const expensesRef = collection(db, "expenses");
+
+        // 🔹 Query for expenses where the user is involved
+        const participantQuery = query(
+            expensesRef, 
+            where("userEmails", "array-contains", user.email) // ✅ Now works because `userEmails` is an array of strings
+        );
+
+        // 🔹 Query for expenses where the user is the payer
+        const payerQuery = query(
+            expensesRef, 
+            where("paidBy", "==", user.email)
+        );
+
+        // Fetch both sets of expenses
+        const [participantSnapshot, payerSnapshot] = await Promise.all([
+            getDocs(participantQuery),
+            getDocs(payerQuery)
+        ]);
+
+        // Merge, remove duplicates, and clean up data
+        const uniqueExpenses = new Map();
+        
+        [...participantSnapshot.docs, ...payerSnapshot.docs].forEach(doc => {
+            if (!uniqueExpenses.has(doc.id)) {
+                uniqueExpenses.set(doc.id, {
+                    id: doc.id,
+                    ...doc.data()
+                });
+            }
+        });
+
+        return Array.from(uniqueExpenses.values());
+    } catch (error) {
+        console.error("❌ Error fetching expenses:", error);
+        return [];
+    }
+};
+
+
+
+// ✅ Delete an Expense (Once Settled)
+export const deleteExpense = async (expenseId) => {
+    try {
+        await deleteDoc(doc(db, "expenses", expenseId));
+        console.log("✅ Expense deleted successfully.");
+        return true;
+    } catch (error) {
+        console.error("❌ Error deleting expense:", error);
+        return false;
+    }
+};
+
+
+// ✅ Fetch All Students for User Selection
+export const fetchStudents = async () => {
+    try {
+        const studentsRef = collection(db, "students");
+        const studentsSnapshot = await getDocs(studentsRef);
+        
+        return studentsSnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
+    } catch (error) {
+        console.error("❌ Error fetching students:", error);
+        return [];
+    }
+};
